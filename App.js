@@ -1,45 +1,44 @@
-import React, { useState } from 'react'
-import { View, Text, StyleSheet, FlatList } from 'react-native'
-import Header from './components/Header'
-import ListItem from './components/ListItem'
-import AddItem from './components/AddItem'
-import Navigator from './routes/homeStack'
+import React, { Component } from 'react'
+import { StyleSheet, Text, View } from 'react-native'
+import { createBottomTabNavigator } from 'react-navigation'
+import Explore from './screens/Explore'
+import Inbox from './screens/Inbox'
+import Saved from './screens/Saved'
+import Trips from './screens/Trips'
 
-const App = () => {
-  const [items, setItems] = useState([
-    { id: Math.random(), text: "Milk" },
-    { id: Math.random(), text: "Eggs" },
-    { id: Math.random(), text: "Bread" },
-    { id: Math.random(), text: "Tea" },
-  ]);
-  const deleteItem = (id) => {
-    setItems(prevItems => {
-      return prevItems.filter(item => item.id != id)
-    })
+class App extends Component {
+  render() {
+    return (
+      <View style={styles.container}>
+        <Text>Open Up in the container</Text>
+      </View>
+    )
   }
-  const addItem = (item) => {
-    setItems(prevItems => {
-      return [{ id: Math.random(), text: item }, ...prevItems]
-    })
-  }
-  return (
-    <Navigator />
-    // <View style={styles.container}>
-    //   <Header title="Shopping List" />
-    //   <AddItem addItem={addItem} />
-    //   <FlatList data={items}
-    //     renderItem={({ item }) => <ListItem item={item} deleteItem={deleteItem} />}
-    //   />
-    // </View>
-  )
 }
+
+
+
+//bottom navigator has 4 screens
+export default createBottomTabNavigator({
+  Expolore: {
+    screen: Explore
+  },
+  Saved: {
+    screen: Saved
+  },
+  Trips: {
+    screen: Trips
+  },
+  Inbox: {
+    screen: Inbox
+  }
+})
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 60
+    justifyContent: "center",
+    alignItems: "center"
   }
 })
 
-
-export default App;
